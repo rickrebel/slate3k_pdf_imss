@@ -1,0 +1,11 @@
+
+# Local editable package
+# -e ./slate3k
+# -e ./pdfminer
+
+slate3k
+pdfminer
+
+# Other expeiments
+# PyPDF2
+# pdfminer.six
