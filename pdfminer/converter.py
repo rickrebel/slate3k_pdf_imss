@@ -100,8 +100,21 @@ class PDFLayoutAnalyzer(PDFTextDevice):
         return item.adv
 
     def handle_undefined_char(self, font, cid):
-        logging.info('undefined: %r, %r' % (font, cid))
-        return f'(cid:{cid})'
+        # Original implementation
+        # logging.info('undefined: %r, %r' % (font, cid))
+        # return f'(cid:{cid})'
+
+        # Hack
+        if cid == 0:
+            return '*'
+        elif cid == 98:
+            return ' '
+        elif 3 <= cid <= 95:
+            return chr(cid + 29)
+
+        # raise PDFUnicodeNotDefined(cid)
+        logger.warning('undefined: %r, %r', font, cid)
+        return f'(cid:{cid}:{chr(cid + 29)})'
 
     def receive_layout(self, ltpage):
         pass
